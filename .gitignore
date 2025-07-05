@@ -5,3 +5,4 @@ telegraph
 *.pem
 *.difypkg
 *.env
+.DS_Store
