@@ -1,0 +1,34 @@
+version: 0.0.1
+type: plugin
+author: luoyl25
+name: telegraph
+label:
+  en_US: telegraph
+  ja_JP: telegraph
+  zh_Hans: telegraph
+  pt_BR: telegraph
+description:
+  en_US: A Telegraph plugin that allows you to publish your content easily
+  ja_JP: A Telegraph plugin that allows you to publish your content easily
+  zh_Hans: A Telegraph plugin that allows you to publish your content easily
+  pt_BR: A Telegraph plugin that allows you to publish your content easily
+icon: icon.svg
+resource:
+  memory: 268435456
+  permission: {}
+plugins:
+  tools:
+    - provider/telegraph.yaml
+meta:
+  version: 0.0.1
+  arch:
+    - amd64
+    - arm64
+  runner:
+    language: python
+    version: "3.12"
+    entrypoint: main
+  minimum_dify_version: null
+created_at: 2025-07-04T07:23:59.8264+08:00
+privacy: PRIVACY.md
+verified: false

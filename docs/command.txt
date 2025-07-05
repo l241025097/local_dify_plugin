@@ -1,0 +1,30 @@
+# REMOTE_DIFY: dify plugin_daemon 服务器
+PROJECT_PATH=/path/to/local_dify_plugin
+REMOTE_DIFY_HOST=xxx.xxx.xxx.xxx
+REMOTE_DIFY_PORT=22
+REMOTE_DIFY_USER=username
+REMOTE_DIFY_REAL_PATH=参考dify部署的docker-compose.yml，plugin_daemon服务的volume映射关系
+REMOTE_DIFY_DOCKER_VOLUME=/app/storage/public_keys
+
+cd $PROJECT_PATH
+
+# 打包项目文件 --> local_mineru.difypkg
+./dify plugin package ./local_mineru
+
+# 生成公私钥对 --> local_plugin.public.pem、local_plugin.private.pem
+./dify signature generate -f local_plugin
+
+# 使用私钥给项目签名 --> local_mineru.signed.difypkg
+./dify signature sign local_mineru.difypkg -p local_plugin.private.pem
+
+# 在dify plugin_daemon服务器上创建存放公钥的文件路径
+docker exec -it docker-plugin_daemon-1 /bin/bash
+su ubuntu
+mkdir -p ${REMOTE_DIFY_DOCKER_VOLUME}
+
+# 将公钥发送到dify plugin_daemon服务器
+scp -P ${REMOTE_DIFY_PORT} local_plugin.public.pem ${REMOTE_DIFY_USER}@${REMOTE_DIFY_HOST}:${REMOTE_DIFY_REAL_PATH}/public_keys
+
+# 配置dify plugin_daemon服务器环境变量，部署后重启服务
+THIRD_PARTY_SIGNATURE_VERIFICATION_ENABLED: true
+THIRD_PARTY_SIGNATURE_VERIFICATION_PUBLIC_KEYS: /app/storage/public_keys/local_plugin.public.pem

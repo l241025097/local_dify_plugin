@@ -1,0 +1,35 @@
+identity:
+  author: "luoyl25"
+  name: "telegraph"
+  label:
+    en_US: "telegraph"
+    zh_Hans: "telegraph"
+    pt_BR: "telegraph"
+  description:
+    en_US: "A Telegraph plugin that allows you to publish your content easily"
+    zh_Hans: "A Telegraph plugin that allows you to publish your content easily"
+    pt_BR: "A Telegraph plugin that allows you to publish your content easily"
+  icon: "icon.svg"
+tools:
+  - tools/telegraph.yaml
+extra:
+  python:
+    source: provider/telegraph.py
+
+credentials_for_provider:
+    telegraph_access_token: # 这是凭证的内部名称，将在 Python 代码中使用
+        type: secret-input # 输入类型为密码框
+        required: true # 此凭证是必需的
+        label: # 在 Dify UI 中显示的标签 (支持多语言)
+            en_US: Telegraph Access Token
+            zh_Hans: Telegraph 访问令牌
+            # ... (其他语言)
+        placeholder: # 输入框的提示文字 (支持多语言)
+            en_US: Enter your Telegraph access token
+            zh_Hans: 请输入您的 Telegraph 访问令牌
+            # ... (其他语言)
+        help: # 帮助提示信息 (支持多语言)
+            en_US: How to get your Telegraph access token
+            zh_Hans: 如何获取 Telegraph 访问令牌
+            # ... (其他语言)
+        url: https://telegra.ph/api#createAccount # 点击帮助提示时跳转的 URL

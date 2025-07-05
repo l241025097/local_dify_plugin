@@ -1,0 +1,39 @@
+version: 0.0.1
+type: plugin
+author: l241025097
+name: local_mineru
+label:
+  en_US: local_mineru
+  ja_JP: local_mineru
+  zh_Hans: local_mineru
+  pt_BR: local_mineru
+description:
+  en_US: MinerU是一款可以在本地部署的将FILES转化为机器可读格式的工具（如markdown、json），可以很方便地抽取为任意格式。MinerU诞生于书生-浦语的预训练过程中，我们将会集中精力解决科技文献中的符号转化问题，希望在大模型时代为科技发展做出贡献。https://github.com/opendatalab/MinerU
+  ja_JP: MinerU是一款可以在本地部署的将FILES转化为机器可读格式的工具（如markdown、json），可以很方便地抽取为任意格式。MinerU诞生于书生-浦语的预训练过程中，我们将会集中精力解决科技文献中的符号转化问题，希望在大模型时代为科技发展做出贡献。https://github.com/opendatalab/MinerU
+  zh_Hans: MinerU是一款可以在本地部署的将FILES转化为机器可读格式的工具（如markdown、json），可以很方便地抽取为任意格式。MinerU诞生于书生-浦语的预训练过程中，我们将会集中精力解决科技文献中的符号转化问题，希望在大模型时代为科技发展做出贡献。https://github.com/opendatalab/MinerU
+  pt_BR: MinerU是一款可以在本地部署的将FILES转化为机器可读格式的工具（如markdown、json），可以很方便地抽取为任意格式。MinerU诞生于书生-浦语的预训练过程中，我们将会集中精力解决科技文献中的符号转化问题，希望在大模型时代为科技发展做出贡献。https://github.com/opendatalab/MinerU
+icon: icon.svg
+resource:
+  memory: 268435456
+  permission:
+    tool:
+      enabled: true
+    storage:
+      enabled: true
+      size: 1048576
+plugins:
+  tools:
+    - provider/local_mineru.yaml
+meta:
+  version: 0.0.1
+  arch:
+    - amd64
+    - arm64
+  runner:
+    language: python
+    version: "3.12"
+    entrypoint: main
+  minimum_dify_version: null
+created_at: 2025-07-04T08:09:25.491213+08:00
+privacy: PRIVACY.md
+verified: false

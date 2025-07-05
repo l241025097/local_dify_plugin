@@ -1,0 +1,42 @@
+identity:
+    name: telegraph_publisher # 工具的唯一内部名称
+    author: luoyl25
+    label: # 在 Dify UI 中显示的工具名称 (多语言)
+        en_US: Publish to Telegraph
+        zh_Hans: 发布到 Telegraph
+        # ... (其他语言)
+description:
+    human: # 给人类用户看的工具描述 (多语言)
+        en_US: Publish content to Telegraph as a new page.
+        zh_Hans: 将内容作为新页面发布到 Telegraph。
+        # ... (其他语言)
+    llm: # 给 LLM 看的工具描述 (用于 Agent 模式)
+        A tool that takes a title and markdown content, then publishes it as a new page on Telegraph, returning the URL of the published page. Use this when the user wants to publish formatted text content publicly via Telegraph.
+parameters: # 定义工具的输入参数列表
+    - name: p_title # 参数的内部名称，与 Python 代码中的 key 对应
+      type: string # 参数类型
+      required: true # 是否必需
+      label: # 在 Dify UI 中显示的参数标签 (多语言)
+          en_US: Post Title
+          zh_Hans: 文章标题
+      human_description: # 给人类用户看的参数描述 (多语言)
+          en_US: The title for the Telegraph page.
+          zh_Hans: Telegraph 页面的标题。
+      llm_description: # 给 LLM 看的参数描述 (指导 Agent 如何填充)
+          The title of the post. Should be a concise and meaningful plain text string.
+      form: llm # 参数表单类型 ('llm' 或 'form')
+    - name: p_content
+      type: string
+      required: true
+      label:
+          en_US: Content (Markdown)
+          zh_Hans: 内容 (Markdown)
+      human_description:
+          en_US: The main content for the Telegraph page, written in Markdown format.
+          zh_Hans: Telegraph 页面的主要内容，请使用 Markdown 格式编写。
+      llm_description: # 强调格式要求对 LLM 很重要
+          The full content to be published on the Telegraph page. Must be provided in Markdown format. Ensure proper Markdown syntax for formatting like headings, lists, links, etc.
+      form: llm
+extra: # 额外配置
+    python:
+        source: tools/telegraph.py # 指向实现该工具逻辑的 Python 文件
