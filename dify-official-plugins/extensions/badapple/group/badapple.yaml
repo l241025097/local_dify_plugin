@@ -1,4 +1,0 @@
-settings: []
-endpoints:
-  - endpoints/index.yaml
-  - endpoints/pathdata.yaml

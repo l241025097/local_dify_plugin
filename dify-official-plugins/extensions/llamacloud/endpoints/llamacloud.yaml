@@ -1,5 +1,0 @@
-path: "/retrieval"
-method: "POST"
-extra:
-  python:
-    source: "endpoints/llamacloud.py"
