@@ -109,7 +109,6 @@ class MineruTool(Tool):
         """
         Upload a file
 
-        :param file_cls: dify_plugin.invocations.file.File class
         :param filename: file name
         :param content: file content
         :param mimetype: file mime type
