@@ -23,7 +23,7 @@ plugins:
   tools:
     - provider/local_mineru.yaml
 meta:
-  version: 0.0.1
+  version: 0.5.0
   arch:
     - amd64
     - arm64
