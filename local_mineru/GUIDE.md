@@ -51,9 +51,9 @@ Now you can edit the `manifest.yaml` file to describe your Plugin, here is the b
       - size(int64)：Maximum allowed persistent memory, unit bytes
 - plugins(object, required)：Plugin extension specific ability yaml file list, absolute path in the plugin package, if you need to extend the model, you need to define a file like openai.yaml, and fill in the path here, and the file on the path must exist, otherwise the packaging will fail.
   - Format
-    - tools(list[string]): Extended tool suppliers, as for the detailed format, please refer to [Tool Guide](https://docs.dify.ai/plugins/schema-definition/tool)
-    - models(list[string])：Extended model suppliers, as for the detailed format, please refer to [Model Guide](https://docs.dify.ai/plugins/schema-definition/model)
-    - endpoints(list[string])：Extended Endpoints suppliers, as for the detailed format, please refer to [Endpoint Guide](https://docs.dify.ai/plugins/schema-definition/endpoint)
+    - tools(list[string]): Extended tool suppliers, as for the detailed format, please refer to [Tool Guide](https://docs.dify.ai/docs/plugins/standard/tool_provider)
+    - models(list[string])：Extended model suppliers, as for the detailed format, please refer to [Model Guide](https://docs.dify.ai/docs/plugins/standard/model_provider)
+    - endpoints(list[string])：Extended Endpoints suppliers, as for the detailed format, please refer to [Endpoint Guide](https://docs.dify.ai/docs/plugins/standard/endpoint_group)
   - Restrictions
     - Not allowed to extend both tools and models
     - Not allowed to have no extension
@@ -69,7 +69,7 @@ Now you can edit the `manifest.yaml` file to describe your Plugin, here is the b
 
 ### Install Dependencies
 
-- First of all, you need a Python 3.11+ environment, as our SDK requires that.
+- First of all, you need a Python 3.10+ environment, as our SDK requires that.
 - Then, install the dependencies:
     ```bash
     pip install -r requirements.txt
@@ -89,7 +89,8 @@ Now you can start to implement your Plugin, by following these examples, you can
 You may already noticed that a `.env.example` file in the root directory of your Plugin, just copy it to `.env` and fill in the corresponding values, there are some environment variables you need to set if you want to debug your Plugin locally.
 
 - `INSTALL_METHOD`: Set this to `remote`, your plugin will connect to a Dify instance through the network.
-- `REMOTE_INSTALL_URL`: The URL of debugging host and port of plugin-daemon service from your Dify instance, eg. `debug.dify.ai:5003`. Either the [Dify SaaS](https://debug.dify.ai) or [self-hosted Dify instance](https://docs.dify.ai/en/getting-started/install-self-hosted/readme) can be used.
+- `REMOTE_INSTALL_HOST`: The host of your Dify instance, you can use our SaaS instance `https://debug.dify.ai`, or self-hosted Dify instance.
+- `REMOTE_INSTALL_PORT`: The port of your Dify instance, default is 5003
 - `REMOTE_INSTALL_KEY`: You should get your debugging key from the Dify instance you used, at the right top of the plugin management page, you can see a button with a `debug` icon, click it and you will get the key.
 
 Run the following command to start your Plugin:
@@ -100,38 +101,6 @@ python -m main
 
 Refresh the page of your Dify instance, you should be able to see your Plugin in the list now, but it will be marked as `debugging`, you can use it normally, but not recommended for production.
 
-### Publish and Update the Plugin
-
-To streamline your plugin update workflow, you can configure GitHub Actions to automatically create PRs to the Dify plugin repository whenever you create a release.
-
-##### Prerequisites
-
-- Your plugin source repository
-- A fork of the dify-plugins repository
-- Proper plugin directory structure in your fork
-
-#### Configure GitHub Action
-
-1. Create a Personal Access Token with write permissions to your forked repository
-2. Add it as a secret named `PLUGIN_ACTION` in your source repository settings
-3. Create a workflow file at `.github/workflows/plugin-publish.yml`
-
-#### Usage
-
-1. Update your code and the version in your `manifest.yaml`
-2. Create a release in your source repository
-3. The action automatically packages your plugin and creates a PR to your forked repository
-
-#### Benefits
-
-- Eliminates manual packaging and PR creation steps
-- Ensures consistency in your release process
-- Saves time during frequent updates
-
----
-
-For detailed setup instructions and example configuration, visit: [GitHub Actions Workflow Documentation](https://docs.dify.ai/plugins/publish-plugins/plugin-auto-publish-pr)
-
 ### Package the Plugin
 
 After all, just package your Plugin by running the following command:
@@ -141,8 +110,3 @@ dify-plugin plugin package ./ROOT_DIRECTORY_OF_YOUR_PLUGIN
 ```
 
 you will get a `plugin.difypkg` file, that's all, you can submit it to the Marketplace now, look forward to your Plugin being listed!
-
-
-## User Privacy Policy
-
-Please fill in the privacy policy of the plugin if you want to make it published on the Marketplace, refer to [PRIVACY.md](PRIVACY.md) for more details.
